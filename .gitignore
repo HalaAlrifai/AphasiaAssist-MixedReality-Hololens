@@ -21,6 +21,7 @@ MemoryCaptures/
 *.userprefs
 *.pidb
 *.booproj
+.vsconfig
 
 # OS files
 .DS_Store

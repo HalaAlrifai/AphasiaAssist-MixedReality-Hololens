@@ -5405,6 +5405,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 296314997202239058, guid: c9d85704c7a62ae44a5fb7778b93ed38, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.0006
+      objectReference: {fileID: 0}
+    - target: {fileID: 296314997202239058, guid: c9d85704c7a62ae44a5fb7778b93ed38, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.0474
+      objectReference: {fileID: 0}
     - target: {fileID: 296314998208112963, guid: c9d85704c7a62ae44a5fb7778b93ed38, type: 3}
       propertyPath: m_text
       value: "Voix f\xE9minine 1"
@@ -5503,7 +5511,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2656243347307033916, guid: c9d85704c7a62ae44a5fb7778b93ed38, type: 3}
       propertyPath: m_text
-      value: Voix masculine 2
+      value: Masculine lente
+      objectReference: {fileID: 0}
+    - target: {fileID: 2656243347307033916, guid: c9d85704c7a62ae44a5fb7778b93ed38, type: 3}
+      propertyPath: m_fontSize
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2656243347307033916, guid: c9d85704c7a62ae44a5fb7778b93ed38, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 2656243347894461644, guid: c9d85704c7a62ae44a5fb7778b93ed38, type: 3}
       propertyPath: m_Name
@@ -5701,13 +5717,25 @@ PrefabInstance:
       propertyPath: <OnClicked>k__BackingField.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 6483207308264153378, guid: c9d85704c7a62ae44a5fb7778b93ed38, type: 3}
+      propertyPath: managedReferences[1].tintables.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 6592130991507437091, guid: c9d85704c7a62ae44a5fb7778b93ed38, type: 3}
       propertyPath: m_Name
       value: VoixMasculine1
       objectReference: {fileID: 0}
     - target: {fileID: 6592130991960123347, guid: c9d85704c7a62ae44a5fb7778b93ed38, type: 3}
       propertyPath: m_text
-      value: Voix masculine 1
+      value: Masculine standard
+      objectReference: {fileID: 0}
+    - target: {fileID: 6592130991960123347, guid: c9d85704c7a62ae44a5fb7778b93ed38, type: 3}
+      propertyPath: m_fontSize
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6592130991960123347, guid: c9d85704c7a62ae44a5fb7778b93ed38, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 7994282051723732824, guid: c9d85704c7a62ae44a5fb7778b93ed38, type: 3}
       propertyPath: m_LocalScale.x
@@ -5785,6 +5813,10 @@ PrefabInstance:
       propertyPath: m_text
       value: Selectionnez une voix
       objectReference: {fileID: 0}
+    - target: {fileID: 8334869128877049045, guid: c9d85704c7a62ae44a5fb7778b93ed38, type: 3}
+      propertyPath: managedReferences[1].tintables.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 296314998208112961, guid: c9d85704c7a62ae44a5fb7778b93ed38, type: 3}
@@ -5806,9 +5838,18 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7994282051723732825, guid: c9d85704c7a62ae44a5fb7778b93ed38, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1915463596}
+    - targetCorrespondingSourceObject: {fileID: 7994282052455871639, guid: c9d85704c7a62ae44a5fb7778b93ed38, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
     - targetCorrespondingSourceObject: {fileID: 3105985024167570440, guid: c9d85704c7a62ae44a5fb7778b93ed38, type: 3}
       insertIndex: -1
       addedObject: {fileID: 358258242}
+    - targetCorrespondingSourceObject: {fileID: 6592130991960123345, guid: c9d85704c7a62ae44a5fb7778b93ed38, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 2656243347307033918, guid: c9d85704c7a62ae44a5fb7778b93ed38, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: c9d85704c7a62ae44a5fb7778b93ed38, type: 3}
 --- !u!4 &736089566 stripped
 Transform:
@@ -5880,8 +5921,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 0.06
-  m_fontSizeBase: 0.06
+  m_fontSize: 0.1
+  m_fontSizeBase: 0.1
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -6406,7 +6447,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2952116381656899928, guid: bb45df82ba657a845aea1b5aa230164f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1046662247}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5792593479834794688, guid: bb45df82ba657a845aea1b5aa230164f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: bb45df82ba657a845aea1b5aa230164f, type: 3}
 --- !u!4 &788658908 stripped
 Transform:
@@ -6725,7 +6769,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7041795561998941580, guid: c25d8f2d22117bd40ad824684551fbde, type: 3}
       insertIndex: -1
       addedObject: {fileID: 922419169}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1811028555225687572, guid: c25d8f2d22117bd40ad824684551fbde, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: c25d8f2d22117bd40ad824684551fbde, type: 3}
 --- !u!4 &797825358 stripped
 Transform:
@@ -7061,7 +7108,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Voix f\xE9minine 2"
+  m_text: "F\xE9minine lente"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -7088,8 +7135,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 0.06
-  m_fontSizeBase: 0.06
+  m_fontSize: 0.1
+  m_fontSizeBase: 0.1
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -8474,8 +8521,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 0.06
-  m_fontSizeBase: 0.06
+  m_fontSize: 0.1
+  m_fontSizeBase: 0.1
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -8623,7 +8670,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Voix f\xE9minine 1"
+  m_text: "F\xE9minine standard"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -8650,8 +8697,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 0.06
-  m_fontSizeBase: 0.06
+  m_fontSize: 0.1
+  m_fontSizeBase: 0.1
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -9099,7 +9146,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7041795561998941580, guid: c25d8f2d22117bd40ad824684551fbde, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1037254388}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1811028555225687572, guid: c25d8f2d22117bd40ad824684551fbde, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: c25d8f2d22117bd40ad824684551fbde, type: 3}
 --- !u!4 &1628171278 stripped
 Transform:
@@ -9210,6 +9260,10 @@ PrefabInstance:
     - target: {fileID: 4363681786958208817, guid: 3fb505a7f547bb44aa5edf1bbec53138, type: 3}
       propertyPath: managedReferences[1].tintables.Array.data[0]
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4514097379813232051, guid: 3fb505a7f547bb44aa5edf1bbec53138, type: 3}
+      propertyPath: MinDistance
+      value: 0.991952
       objectReference: {fileID: 0}
     - target: {fileID: 4665851243671331888, guid: 3fb505a7f547bb44aa5edf1bbec53138, type: 3}
       propertyPath: m_AllowGazeSelect
@@ -9783,6 +9837,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8643814256977285948, guid: 3fb505a7f547bb44aa5edf1bbec53138, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1629864316}
+    - targetCorrespondingSourceObject: {fileID: 1492695349925330265, guid: 3fb505a7f547bb44aa5edf1bbec53138, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 82738942172622338, guid: 3fb505a7f547bb44aa5edf1bbec53138, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 3fb505a7f547bb44aa5edf1bbec53138, type: 3}
 --- !u!1 &1629864314 stripped
 GameObject:
@@ -10483,7 +10543,13 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7041795561998941580, guid: c25d8f2d22117bd40ad824684551fbde, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2117653424}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5092507606405556712, guid: c25d8f2d22117bd40ad824684551fbde, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
+    - targetCorrespondingSourceObject: {fileID: 1811028555225687572, guid: c25d8f2d22117bd40ad824684551fbde, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: c25d8f2d22117bd40ad824684551fbde, type: 3}
 --- !u!4 &1999954062 stripped
 Transform:

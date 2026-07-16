@@ -10,7 +10,7 @@ using System;
 public class VoiceManager : MonoBehaviour
 {
     public string phrase =
-        "Bonjour. Écoutez cette voix et choisissez celle que vous préférez.";
+        " Bonjour. Écoutez cette prononciation et indiquez celle que vous préférez.";
     public static VoiceManager Instance;
     private static bool isSpeaking = false;
     public string selectedVoice = "Hortense"; // Default voice
@@ -51,7 +51,7 @@ public class VoiceManager : MonoBehaviour
         selectedPitch = "medium";
         selectedVolume = "100%";
 
-        SpeakSelectedVoice("Bonjour. Écoutez cette voix et choisissez celle que vous préférez.");
+        SpeakSelectedVoice(" Bonjour. Écoutez cette prononciation et indiquez celle que vous préférez.");
     }
 
     // Voix féminine 2 : Hortense lente
@@ -68,7 +68,7 @@ public class VoiceManager : MonoBehaviour
         selectedPitch = "medium";
         selectedVolume = "100%";
 
-        SpeakSelectedVoice("Bonjour. Écoutez cette voix et choisissez celle que vous préférez."); ;
+        SpeakSelectedVoice(" Bonjour. Écoutez cette prononciation et indiquez celle que vous préférez.."); ;
     }
 
     // Voix masculine 1 : Paul normal
@@ -85,7 +85,7 @@ public class VoiceManager : MonoBehaviour
         selectedPitch = "medium";
         selectedVolume = "100%";
 
-        SpeakSelectedVoice("Bonjour. Écoutez cette voix et choisissez celle que vous préférez.");
+        SpeakSelectedVoice(" Bonjour. Écoutez cette prononciation et indiquez celle que vous préférez.");
     }
 
     // Voix masculine 2 : Paul lent
@@ -102,7 +102,7 @@ public class VoiceManager : MonoBehaviour
         selectedPitch = "medium";
         selectedVolume = "100%";
 
-        SpeakSelectedVoice("Bonjour. Écoutez cette voix et choisissez celle que vous préférez.");
+        SpeakSelectedVoice(" Bonjour. Écoutez cette prononciation et indiquez celle que vous préférez.");
     }
 
     public void SpeakSelectedVoice(string phrase)

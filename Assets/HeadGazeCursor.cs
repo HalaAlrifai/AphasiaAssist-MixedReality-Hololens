@@ -1,5 +1,6 @@
-using UnityEngine;
 using TMPro;
+using UnityEngine;
+using UnityEngine.Windows.Speech;
 
 public class HeadGazeCursor : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class HeadGazeCursor : MonoBehaviour
 
     void Update()
     {
+        PhraseRecognitionSystem.Restart();
         Ray ray = new Ray(
             Camera.main.transform.position,
             Camera.main.transform.forward

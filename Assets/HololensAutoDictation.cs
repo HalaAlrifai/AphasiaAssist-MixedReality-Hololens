@@ -40,7 +40,7 @@ public class HoloLensAutoDictation : MonoBehaviour
     private bool backClicked = false;
     private void OnEnable()
     {
-        speechText.text = "Onenble";
+       // speechText.text = "Onenble";
 
         PhraseRecognitionSystem.Shutdown();
         dictationRecognizer.Start();
@@ -274,27 +274,30 @@ public class HoloLensAutoDictation : MonoBehaviour
         Action<bool> onFinished)
     {
         string prompt =
-    "Tu es un assistant de communication pour faciliter la compréhension pour les personnes aphasiques quand elles parlent ou leur interlocuteur.\n\n" +
-    "Contexte de la conversation :\n" +
-    context +
-    "\n\nPhrase à reformuler :\n" +
-    phraseToReformulate +
-    "\n\nConsignes obligatoires :\n" +
-    "- n'ajouter pas une phrase de debut ou de fin du type \"Voici la reformulation\".\n" +
-    "-commencer la reformulation par la phrase reformulée sans texte supplémentaire.\n" +
-    "- simplifier le texte pour qu'il soit plus facile à comprendre.\n" +
-    "- laisser le moins de mots possibles en laissant les mots clés de la phrase.\n" +
-    "- Reformuler uniquement la phrase indiquée.\n" +
-    "- Garder exactement le même sens.\n" +
-    "- Utiliser des mots simples, concrets et courants.\n" +
-    "- Supprimer les formulations abstraites. \n" +
-    "- Prendre en compte la segmentation des informations.\n" +
-    "- Ne mettre qu'une idée importante par phrase.\n" +
-    "- Si la phrase contient plusieurs informations, sépare-les en plusieurs phrases courtes.\n" +
-    "- Préférer la tournure active à la tournure passive.\n" +
-    "- faire des phrases courtes et simples: sujet/ verbe / complément.\n" +
-    "- N'ajoute aucune nouvelle information.\n" +
-    "- Bonne reformulation : \"Il faut séparer les informations en petites parties.\"\n";
+"Tu es un assistant de communication pour faciliter la compréhension pour les personnes aphasiques quand leur interlocuteur parle .\n\n" +
+"Contexte de la conversation :\n" +
+context +
+"\n\nPhrase à reformuler :\n" +
+phraseToReformulate +
+"\n\nConsignes obligatoires :\n" +
+"- n'ajouter pas une phrase de debut ou de fin du type \"Voici la reformulation\".\n" +
+"- quand il clique Plusieurs fois sur le bouton reformulation, il faut que la reformulation change à chaque fois.\n" +
+"- a chauque fois qu'il clique a nouveau sur le bouton reformulation pour la meme phrase, il faut que la reformulation devienne plus courte et plus simple que la précédente.\n" +
+"-commencer la reformulation par la phrase reformulée sans texte supplémentaire.\n" +
+"- donner qu'une seule reformulation par phrase.\n" +
+"- simplifier le texte pour qu'il soit plus facile à comprendre.\n" +
+"- laisser le moins de mots possibles en laissant les mots clés de la phrase.\n" +
+"- Reformuler uniquement la phrase indiquée.\n" +
+"- Garder exactement le même sens.\n" +
+"- Utiliser des mots simples, concrets et courants.\n" +
+"- Supprimer les formulations abstraites. \n" +
+"- Prendre en compte la segmentation des informations.\n" +
+"- Ne mettre qu'une idée importante par phrase.\n" +
+"- Si la phrase contient plusieurs informations, sépare-les en plusieurs phrases courtes.\n" +
+"- Préférer la tournure active à la tournure passive.\n" +
+"- faire des phrases courtes et simples: sujet/ verbe / complément.\n" +
+"- N'ajoute aucune nouvelle information.\n" +
+"- Bonne reformulation : \"Il faut séparer les informations en petites parties.\"\n";
 
         GeminiRequestData requestData =
             new GeminiRequestData
@@ -413,7 +416,7 @@ public class HoloLensAutoDictation : MonoBehaviour
     }
     public void sayreformulationTextAloud(string text)
     {
-       VoiceManager.Instance.SpeakSelectedVoice(text);
+        VoiceManager.Instance.SpeakSelectedVoice(text);
     }
   
 

@@ -1,17 +1,9 @@
 using System;
 using System.Collections;
-using System.IO;
-using System.Security.Cryptography;
 using System.Text;
 using TMPro;
-using Unity.VisualScripting;
-using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.Networking;
-using UnityEngine.Windows.Speech;
-using static UnityEditor.Experimental.GraphView.Port;
-using static UnityEngine.EventSystems.EventTrigger;
-using static UnityEngine.UIElements.UxmlAttributeDescription;
 
 public class HoloLensAutoDictation : MonoBehaviour
 {

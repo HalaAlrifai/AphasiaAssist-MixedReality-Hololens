@@ -1,11 +1,17 @@
 using System;
 using System.Collections;
+using System.IO;
+using System.Security.Cryptography;
 using System.Text;
 using TMPro;
 using Unity.VisualScripting;
+using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.Windows.Speech;
+using static UnityEditor.Experimental.GraphView.Port;
+using static UnityEngine.EventSystems.EventTrigger;
+using static UnityEngine.UIElements.UxmlAttributeDescription;
 
 public class HoloLensAutoDictation : MonoBehaviour
 {
@@ -23,204 +29,72 @@ public class HoloLensAutoDictation : MonoBehaviour
         "v1beta/models/" +
         GeminiModel +
         ":generateContent";
-
-    private DictationRecognizer dictationRecognizer;
-
-    // Phrase actuellement reconnue
-    private string fullText = "";
-
-    // Dernière phrase terminée
-    private string lastPhrase = "";
-
-    // Historique utilisé comme contexte par Gemini
     private string conversationHistory = "";
 
     private bool geminiRequestInProgress = false;
     private bool applicationIsClosing = false;
     private bool backClicked = false;
-    private void OnEnable()
+    
+    private string[] fullText =
+{
+    " Salut !Petite info pour Alain et puis Nicolas aussi pour que tu sois informé. C’est les démarches pour essayer de reprendre la conduite d’un véhicule. L’orthophoniste d'Alain, elle m’a dit qu’il y avait le centre Lay St Christophe qui propose un programme qui s’appelle Conduite IRR qui permet de faire une réhabilitation à la conduite avant de passer par le fameux médecin régulateur et donc je les ai appelés. Ils m’ont dit que pour pouvoir bénéficier de ce programme-là, il fallait simplement que le médecin traitant fasse un courrier au centre Lay St Christophe. Pour pouvoir avoir un rendez-vous chez eux. Il faut que le médecin explique les difficultés pour la conduite, enfin donner toutes les infos sur l’état de de santé. Donc voilà on en rediscutera dimanche pour voir comment mettre ça en place",
+    "Je viens de vous envoyer le lien que l’orthophoniste m’avait envoyé qui parle de ce fameux programme",
+    "Depuis 2023, le centre a un simulateur de conduite. C’est super tu verras, tu pourras t’entrainer comme sur un jeu vidéo ! Apparemment le centre pourrait t’accompagner dans ton projet de reprise de la conduite. En fait ils sont là pour évaluer tes capacités et identifier les éventuels aménagements à faire sur le véhicule. Pour ton cas je ne pense pas que tu aies besoin d’aménagement. L’avantage aussi c’est que ça permet de t ’entraîner sans stress avec des professionnels bienveillants face à tes difficultés…Voilà. De ce que j’ai lu, ils ont aussi un véhicule réel, une jeep je crois, pour vraiment évaluer et former en situation réelle les personnes. Après je ne sais pas du tout s’il y a des délais d’attente longs, j’imagine que oui. On verra bien. C’est toi qui décideras de toute façon. \r\n\r\nJ’ai trouvé une vidéo plus récente qui date de l’année dernière et qui donne encore plus d’explications. Je te mettrai le lien après. Le centre voit entre 150 et 200 patients par an. Il est là pour faire une évaluation en amont de la visite chez le médecin régulateur qui donne l’autorisation de la reprise de la conduite. Il y a plusieurs personnes qui peuvent intervenir : le médecin, le neuropsy, l’orthoptiste et l’ergothérapeute. Ça a l’air vraiment bien, j’espère qu’ils ont de la place. Tiens je te donne le lien de la vidéo ",
+    " Et Alain est-ce que tu as rendez-vous dans pas longtemps avec le docteur Séverin ? ",
+    "Ok si tu veux bien je viendrai avec toi je t’emmènerai et comme ça on pourra discuter avec elle de ça. C’est à quelle heure ?"
+};
+    private string[] reformulatedSentences =
     {
-        speechText.text = "Onenble";
+        "Alain veut conduire à nouveau. L'orthophoniste conseille le centre Lay Saint-Christophe. Ce centre propose un programme de rééducation. Votre médecin doit envoyer un courrier au centre. Ce courrier explique la santé d'Alain. Nous en parlerons dimanche pour organiser cela.",
+        "Alain veut reprendre la conduite. L'orthophoniste conseille le centre Lay Saint-Christophe. Ce centre propose une rééducation à la conduite. Il faut un courrier du médecin traitant pour obtenir un rendez-vous. Le médecin doit expliquer les difficultés de santé. On en parlera dimanche.",
+        "L'orthophoniste a un programme. Je vous ai envoyé le lien par mail.",
+        "L'orthophoniste a conseillé un programme. Je vous ai envoyé le lien par mail.",
+        "Le centre propose un simulateur de conduite comme un jeu vidéo. Il évalue vos capacités. Il vérifie si vous avez besoin d'aménagements sur la voiture. Il y a des professionnels pour vous aider sans stress. Ils ont aussi une vraie voiture pour la pratique. Vous déciderez si vous voulez y aller. Le centre aide 200 patients par an. Des spécialistes évaluent votre conduite. Cela prépare votre visite chez le médecin pour conduire à nouveau. Je vous envoie une vidéo avec des explications.",
+        "Le centre a un simulateur de conduite. C'est comme un jeu vidéo pour s'entraîner. Ils évaluent vos capacités pour conduire. Ils vérifient si la voiture a besoin de changements. Tu n'auras sûrement pas besoin de changements. Tu peux t'entraîner sans stress avec des professionnels. Le centre a aussi une vraie Jeep pour les essais. Il y a peut-être un temps d'attente. C'est toi qui décideras. Ils voient 200 patients par an. Ils préparent ta visite chez le médecin pour conduire. Le médecin, le neuropsy, l'orthoptiste et l'ergothérapeute travaillent ici. Regarde cette vidéo pour en savoir plus.",
+        "Alain, tu as un rendez-vous bientôt avec le docteur Séverin ?",
+        "Alain, as-tu bientôt rendez-vous avec le docteur Séverin ?",
+        "Je viens avec toi.\r\nOn va lui parler.\r\nÀ quelle heure ?",
+        "Je t'accompagne.\r\nNous parlerons avec elle.\r\nÀ quelle heure ?"
+    };
 
-        PhraseRecognitionSystem.Shutdown();
-        dictationRecognizer.Start();
+    private int currentSentence = 0;
+    private int n = 0;
 
-    }
-
-    private void Start()
-    {
-       
-        speechText.text = "Préparation de l'écoute...";
-        reformulationText.text =
-            "La reformulation apparaîtra ici...";
-
-        dictationRecognizer = new DictationRecognizer();
-
-        dictationRecognizer.DictationHypothesis += OnHypothesis;
-        dictationRecognizer.DictationResult += OnResult;
-        dictationRecognizer.DictationComplete += OnComplete;
-        dictationRecognizer.DictationError += OnError;
-      
-
-
-
-        fullText = "";
-
-        try
-        {
-            dictationRecognizer.Start();
-            speechText.text = "En attente d'une phrase...";
-        }
-        catch (Exception exception)
-        {
-            speechText.text =
-                "Impossible de démarrer l'écoute.";
-
-            Debug.LogError(
-                "Erreur au démarrage de la dictée : " +
-                exception.Message
-            );
-        }
-    }
-
-    private void OnHypothesis(string text)
-    {
-        // Facultatif :
-        // afficher le texte provisoire pendant que la personne parle.
-        //
-        // speechText.text = text;
-    }
-
-    private void OnResult(
-        string text,
-        ConfidenceLevel confidence)
-    {
-        string recognizedText = text.Trim();
-
-        if (string.IsNullOrWhiteSpace(text))
-        {
-            return;
-        }
-
-        fullText = text + " ";
-        conversationHistory += text + "\n";
-
-        speechText.text = fullText.Trim();
-    }
-
-    private void OnComplete(
-        DictationCompletionCause cause)
-    {
-        if (backClicked)
-        {
-            backClicked = false;
-            return;
-        }
-        if (applicationIsClosing)
-        {
-            return;
-        }
-
-        // Sauvegarder la phrase avant de vider fullText.
-        if (!string.IsNullOrWhiteSpace(fullText))
-        {
-            lastPhrase = fullText.Trim();
-        }
-
-        fullText = "";
-
-        speechText.text =
-            "En attente d'une nouvelle phrase...";
-        if (dictationRecognizer != null)
-        {
-            try
-            {
-                PhraseRecognitionSystem.Shutdown();
-
-                if (dictationRecognizer.Status !=
-                    SpeechSystemStatus.Running)
-                {
-                    dictationRecognizer.Start();
-                }
-            }
-            catch (Exception exception)
-            {
-                Debug.LogError(
-                    "Impossible de redémarrer la dictée : " +
-                    exception.Message
-                );
-            }
-        }
-    }
-
-    private void OnError(
-        string error,
-        int hresult)
-    {
-        speechText.text =
-            "Erreur vocale : " + error;
-
-        Debug.LogError(
-            "Erreur de dictée : " + error +
-            "\nHResult : " + hresult
-        );
-    }
+    
 
     public void OnBackButtonClicked()
     {
-        backClicked = true;
-
-        if (dictationRecognizer != null &&
-            dictationRecognizer.Status == SpeechSystemStatus.Running)
-        {
-            dictationRecognizer.Stop();
-        }
-
-        PhraseRecognitionSystem.Restart();
+        
     }
 
     public void OnReformulationButtonClicked()
+{
+    if (currentSentence == fullText.Length)
     {
-        if (geminiRequestInProgress)
-        {
-            reformulationText.text =
-                "Une reformulation est déjà en cours.";
-
-            return;
-        }
-
-        if (string.IsNullOrWhiteSpace(apiKey))
-        {
-            reformulationText.text =
-                "La clé API Gemini est vide.";
-
-            return;
-        }
-
-        /*
-         * Si une phrase est en cours, utiliser fullText.
-         * Sinon, utiliser la dernière phrase terminée.
-         */
-        string phraseToReformulate =
-            !string.IsNullOrWhiteSpace(fullText)
-                ? fullText.Trim()
-                : lastPhrase;
-
-        if (string.IsNullOrWhiteSpace(phraseToReformulate))
-        {
-            reformulationText.text =
-                "Aucune phrase à reformuler.";
-
-            return;
-        }
-
-        StartCoroutine(
-            SendToGeminiWithRetry(
-                phraseToReformulate,
-                conversationHistory
-            )
-        );
+        currentSentence = 0;
     }
+
+    int reformulationIndex = currentSentence * 2 + n;
+
+    if (reformulationIndex >= reformulatedSentences.Length)
+    {
+        reformulationText.text = "Aucune reformulation.";
+        return;
+    }
+
+    reformulationText.text =
+        reformulatedSentences[reformulationIndex];
+
+    sayreformulationTextAloud(reformulationText.text);
+
+    n++;
+
+    if (n == 2)
+    {
+        n = 0;
+        currentSentence++;
+    }
+}
 
     private IEnumerator SendToGeminiWithRetry(
         string phraseToReformulate,
@@ -274,14 +148,17 @@ public class HoloLensAutoDictation : MonoBehaviour
         Action<bool> onFinished)
     {
         string prompt =
-    "Tu es un assistant de communication pour faciliter la compréhension pour les personnes aphasiques quand elles parlent ou leur interlocuteur.\n\n" +
+    "Tu es un assistant de communication pour faciliter la compréhension pour les personnes aphasiques quand leur interlocuteur parle .\n\n" +
     "Contexte de la conversation :\n" +
     context +
     "\n\nPhrase à reformuler :\n" +
     phraseToReformulate +
     "\n\nConsignes obligatoires :\n" +
     "- n'ajouter pas une phrase de debut ou de fin du type \"Voici la reformulation\".\n" +
+    "- quand il clique Plusieurs fois sur le bouton reformulation, il faut que la reformulation change à chaque fois.\n" +
+    "- a chauque fois qu'il clique a nouveau sur le bouton reformulation pour la meme phrase, il faut que la reformulation devienne plus courte et plus simple que la précédente.\n" +
     "-commencer la reformulation par la phrase reformulée sans texte supplémentaire.\n" +
+    "- donner qu'une seule reformulation par phrase.\n" +
     "- simplifier le texte pour qu'il soit plus facile à comprendre.\n" +
     "- laisser le moins de mots possibles en laissant les mots clés de la phrase.\n" +
     "- Reformuler uniquement la phrase indiquée.\n" +
@@ -413,7 +290,7 @@ public class HoloLensAutoDictation : MonoBehaviour
     }
     public void sayreformulationTextAloud(string text)
     {
-       VoiceManager.Instance.SpeakSelectedVoice(text);
+      // VoiceManager.Instance.SpeakSelectedVoice(text);
     }
   
 
@@ -441,36 +318,6 @@ public class HoloLensAutoDictation : MonoBehaviour
         return candidate.content.parts[0].text;
     }
 
-    private void OnDestroy()
-    {
-        applicationIsClosing = true;
-
-        if (dictationRecognizer == null)
-        {
-            return;
-        }
-
-        dictationRecognizer.DictationHypothesis -=
-            OnHypothesis;
-
-        dictationRecognizer.DictationResult -=
-            OnResult;
-
-        dictationRecognizer.DictationComplete -=
-            OnComplete;
-
-        dictationRecognizer.DictationError -=
-            OnError;
-
-        if (dictationRecognizer.Status ==
-            SpeechSystemStatus.Running)
-        {
-            dictationRecognizer.Stop();
-        }
-
-        dictationRecognizer.Dispose();
-        dictationRecognizer = null;
-    }
 
     [Serializable]
     private class GeminiRequestData

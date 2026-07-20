@@ -29,7 +29,7 @@ public class HoloLensAutoDictation : MonoBehaviour
     
     private string[] fullText =
 {
-    " Salut !Petite info pour Alain et puis Nicolas aussi pour que tu sois informé. C’est les démarches pour essayer de reprendre la conduite d’un véhicule. L’orthophoniste d'Alain, elle m’a dit qu’il y avait le centre Lay St Christophe qui propose un programme qui s’appelle Conduite IRR qui permet de faire une réhabilitation à la conduite avant de passer par le fameux médecin régulateur et donc je les ai appelés. Ils m’ont dit que pour pouvoir bénéficier de ce programme-là, il fallait simplement que le médecin traitant fasse un courrier au centre Lay St Christophe. Pour pouvoir avoir un rendez-vous chez eux. Il faut que le médecin explique les difficultés pour la conduite, enfin donner toutes les infos sur l’état de de santé. Donc voilà on en rediscutera dimanche pour voir comment mettre ça en place",
+    "Salut Alain! Petite info, pour toi et Nicolas aussi pour qu’il soit informé. C’est les démarches pour essayer de reprendre la conduite d’un véhicule. Ton orthophoniste, elle m’a dit qu’il y avait le centre Lay St Christophe qui propose un programme qui s’appelle Conduite IRR qui permet de faire une réhabilitation à la conduite avant de passer par le fameux médecin régulateur et donc je les ai appelés. Ils m’ont dit que pour pouvoir bénéficier de ce programme-là, il fallait simplement que le médecin traitant fasse un courrier au centre Lay St Christophe. Pour pouvoir avoir un rendez-vous chez eux. Il faut que le médecin explique les difficultés pour la conduite, enfin donner toutes les infos sur l’état de de santé. Donc voilà on en rediscutera dimanche pour voir comment mettre ça en place.",
     "Je viens de vous envoyer le lien que l’orthophoniste m’avait envoyé qui parle de ce fameux programme",
     "Depuis 2023, le centre a un simulateur de conduite. C’est super tu verras, tu pourras t’entrainer comme sur un jeu vidéo ! Apparemment le centre pourrait t’accompagner dans ton projet de reprise de la conduite. En fait ils sont là pour évaluer tes capacités et identifier les éventuels aménagements à faire sur le véhicule. Pour ton cas je ne pense pas que tu aies besoin d’aménagement. L’avantage aussi c’est que ça permet de t ’entraîner sans stress avec des professionnels bienveillants face à tes difficultés…Voilà. De ce que j’ai lu, ils ont aussi un véhicule réel, une jeep je crois, pour vraiment évaluer et former en situation réelle les personnes. Après je ne sais pas du tout s’il y a des délais d’attente longs, j’imagine que oui. On verra bien. C’est toi qui décideras de toute façon. \r\n\r\nJ’ai trouvé une vidéo plus récente qui date de l’année dernière et qui donne encore plus d’explications. Je te mettrai le lien après. Le centre voit entre 150 et 200 patients par an. Il est là pour faire une évaluation en amont de la visite chez le médecin régulateur qui donne l’autorisation de la reprise de la conduite. Il y a plusieurs personnes qui peuvent intervenir : le médecin, le neuropsy, l’orthoptiste et l’ergothérapeute. Ça a l’air vraiment bien, j’espère qu’ils ont de la place. Tiens je te donne le lien de la vidéo ",
     " Et Alain est-ce que tu as rendez-vous dans pas longtemps avec le docteur Séverin ? ",
@@ -147,6 +147,9 @@ public class HoloLensAutoDictation : MonoBehaviour
     phraseToReformulate +
     "\n\nConsignes obligatoires :\n" +
     "- n'ajouter pas une phrase de debut ou de fin du type \"Voici la reformulation\".\n" +
+    "- si l'interlocuteur tutoie la personne aphasique, tu dois aussi tutoyer la personne aphasique dans la reformulation.\n" +
+    "- si l'interlocuteur vouvoie la personne aphasique, tu dois aussi vouvoyer la personne aphasique dans la reformulation.\n" +
+    "-ne pas faire un resumé de la phrase, mais une reformulation en conservant le style d'une discussion orale.\n" +
     "- quand il clique Plusieurs fois sur le bouton reformulation, il faut que la reformulation change à chaque fois.\n" +
     "- a chauque fois qu'il clique a nouveau sur le bouton reformulation pour la meme phrase, il faut que la reformulation devienne plus courte et plus simple que la précédente.\n" +
     "-commencer la reformulation par la phrase reformulée sans texte supplémentaire.\n" +
@@ -278,7 +281,7 @@ public class HoloLensAutoDictation : MonoBehaviour
     }
     public void RepeatReformulatedTex()
     {
-        sayreformulationTextAloud(reformulationText.text);
+        //sayreformulationTextAloud(reformulationText.text);
     }
     public void sayreformulationTextAloud(string text)
     {

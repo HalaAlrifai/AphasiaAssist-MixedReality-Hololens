@@ -37,16 +37,16 @@ public class HoloLensAutoDictation : MonoBehaviour
 };
     private string[] reformulatedSentences =
     {
-        "Alain veut conduire à nouveau. L'orthophoniste conseille le centre Lay Saint-Christophe. Ce centre propose un programme de rééducation. Votre médecin doit envoyer un courrier au centre. Ce courrier explique la santé d'Alain. Nous en parlerons dimanche pour organiser cela.",
-        "Alain veut reprendre la conduite. L'orthophoniste conseille le centre Lay Saint-Christophe. Ce centre propose une rééducation à la conduite. Il faut un courrier du médecin traitant pour obtenir un rendez-vous. Le médecin doit expliquer les difficultés de santé. On en parlera dimanche.",
-        "L'orthophoniste a un programme. Je vous ai envoyé le lien par mail.",
-        "L'orthophoniste a conseillé un programme. Je vous ai envoyé le lien par mail.",
-        "Le centre propose un simulateur de conduite comme un jeu vidéo. Il évalue vos capacités. Il vérifie si vous avez besoin d'aménagements sur la voiture. Il y a des professionnels pour vous aider sans stress. Ils ont aussi une vraie voiture pour la pratique. Vous déciderez si vous voulez y aller. Le centre aide 200 patients par an. Des spécialistes évaluent votre conduite. Cela prépare votre visite chez le médecin pour conduire à nouveau. Je vous envoie une vidéo avec des explications.",
-        "Le centre a un simulateur de conduite. C'est comme un jeu vidéo pour s'entraîner. Ils évaluent vos capacités pour conduire. Ils vérifient si la voiture a besoin de changements. Tu n'auras sûrement pas besoin de changements. Tu peux t'entraîner sans stress avec des professionnels. Le centre a aussi une vraie Jeep pour les essais. Il y a peut-être un temps d'attente. C'est toi qui décideras. Ils voient 200 patients par an. Ils préparent ta visite chez le médecin pour conduire. Le médecin, le neuropsy, l'orthoptiste et l'ergothérapeute travaillent ici. Regarde cette vidéo pour en savoir plus.",
-        "Alain, tu as un rendez-vous bientôt avec le docteur Séverin ?",
-        "Alain, as-tu bientôt rendez-vous avec le docteur Séverin ?",
-        "Je viens avec toi.\r\nOn va lui parler.\r\nÀ quelle heure ?",
-        "Je t'accompagne.\r\nNous parlerons avec elle.\r\nÀ quelle heure ?"
+        "Salut Alain. Je parle à toi et Nicolas pour la conduite. Ton orthophoniste a trouvé un centre : Lay-Saint-Christophe. Ils aident à reprendre la conduite. Il faut un courrier de ton médecin traitant. Ce courrier explique ton état de santé. On en reparle dimanche",
+        "Salut Alain. Je parle pour toi et pour Nicolas. Tu veux reprendre la conduite. Ton orthophoniste conseille le centre Lay-Saint-Christophe. Ils proposent un programme de rééducation. Il faut un courrier de ton médecin traitant. Ce courrier doit expliquer ta santé. On en parlera dimanche.",
+        "Je vous ai envoyé le lien de l’orthophoniste. Il explique le programme.",
+        "Je vous ai envoyé le lien de l’orthophoniste. C’est pour le programme.",
+        "Le centre a un simulateur de conduite depuis 2023. C’est comme un jeu vidéo pour s’entraîner. Le centre peut t’aider à reprendre la conduite. Ils vérifient tes capacités. Ils regardent si la voiture a besoin d’aménagements. Pour toi, je pense que ce n’est pas nécessaire. C’est sans stress avec des professionnels. Ils ont aussi une vraie voiture, une Jeep, pour essayer en vrai. Il y a sûrement de l’attente. C’est toi qui choisiras. J’ai une vidéo avec plus d’infos. Je te donnerai le lien. Le centre aide 150 à 200 personnes par an. Il prépare ton rendez-vous avec le médecin. Ce médecin autorise la conduite. Une équipe t’aide : médecin, neuropsy, orthoptiste et ergothérapeute. C’est bien. J’espère qu’ils ont de la place. Voilà le lien.",
+        "Le centre a un simulateur de conduite depuis 2023. C’est comme un jeu vidéo. Tu peux t’entraîner sans stress. Ils évaluent tes capacités pour conduire. Ils regardent si la voiture a besoin de changements. Je ne pense pas que tu aies besoin de changements. Ils ont aussi une vraie voiture pour les essais. Ils voient 200 personnes par an. Le médecin, le neuropsy, l’orthoptiste et l’ergothérapeute travaillent ici. Ils préparent ton avis médical pour conduire. J’espère qu’ils ont de la place. Je t’envoie la vidéo pour voir comment ça marche. Tu choisiras ensuite.",
+        "Alain, tu as rendez-vous avec le docteur Séverin bientôt ?",
+        "Alain, tu as un rendez-vous bientôt ? Avec le docteur Séverin ?",
+        "Je viens avec toi. On va lui parler. À quelle heure on y va ?",
+        "Je t’accompagne. On va lui parler. À quelle heure ?"
     };
 
     private int currentSentence = 0;
